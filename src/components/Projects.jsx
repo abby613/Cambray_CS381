@@ -1,55 +1,49 @@
 import React from 'react'
 
-function ProjectCard({title, role, bullets}){
+function LearningCard({title, items}){
   return (
-    <article className="project-card">
+    <article className="learning-card">
       <h3>{title}</h3>
-      <p className="role">{role}</p>
       <ul>
-        {bullets.map((b,i)=>(<li key={i}>{b}</li>))}
+        {items.map((item,i)=>(<li key={i}>{item}</li>))}
       </ul>
     </article>
   )
 }
 
 export default function Projects(){
-  const projects = [
+  const learning = [
     {
-      title: 'Data Structures & Algorithms Project',
-      role: 'What I know',
-      bullets: [
-        'Implemented core data structures: linked lists, trees, hash maps',
-        'Solved complex algorithmic problems with optimal time/space complexity',
-        'Built sorting and searching algorithms from first principles',
+      title: 'What I Know',
+      items: [
+        'RESTful APIs & Backend Systems',
+        'Database Design & SQL Optimization',
+        'Full-Stack Web Development',
       ]
     },
     {
-      title: 'Full-Stack Web Application',
-      role: 'What I learned',
-      bullets: [
-        'Built complete REST API with Node.js and Express backend',
-        'Designed normalized databases and optimized SQL queries',
-        'Deployed to cloud platform and managed CI/CD pipeline',
+      title: 'Currently Learning',
+      items: [
+        'Machine Learning & AI Integration',
+        'Cloud Architecture (AWS/GCP)',
+        'DevOps & Infrastructure-as-Code',
       ]
     },
     {
-      title: 'Distributed Systems Project',
-      role: 'What I aspire to',
-      bullets: [
-        'Design scalable backend architectures for high-traffic systems',
-        'Deep dive into systems programming and performance optimization',
-        'Explore cloud-native development and containerization practices',
+      title: 'Future Goals',
+      items: [
+        'Distributed Systems & Microservices',
+        'Advanced AI/ML Pipelines',
+        'System Design & Scalability',
       ]
     }
   ]
 
   return (
     <section className="projects">
-      <h2>The Big Three</h2>
-      <p>Select three projects that show growth: one that shows what you know, one that shows what you learned, and one that shows what you aspire to do.</p>
-      <div className="project-grid">
-        {projects.map((p,i)=>(
-          <ProjectCard key={i} title={p.title} role={p.role} bullets={p.bullets} />
+      <div className="learning-grid">
+        {learning.map((l,i)=>(
+          <LearningCard key={i} title={l.title} items={l.items} />
         ))}
       </div>
     </section>
