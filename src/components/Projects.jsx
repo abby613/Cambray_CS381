@@ -15,30 +15,30 @@ function ProjectCard({title, role, bullets}){
 export default function Projects(){
   const projects = [
     {
-      title: 'E-Commerce REST API',
+      title: 'Data Structures & Algorithms Project',
       role: 'What I know',
       bullets: [
-        'Built a RESTful API with Node.js and Express',
-        'Database design with PostgreSQL and query optimization',
-        'Implemented authentication and authorization patterns',
+        'Implemented core data structures: linked lists, trees, hash maps',
+        'Solved complex algorithmic problems with optimal time/space complexity',
+        'Built sorting and searching algorithms from first principles',
       ]
     },
     {
-      title: 'Real-Time Chat Application',
+      title: 'Full-Stack Web Application',
       role: 'What I learned',
       bullets: [
-        'Mastered WebSocket communication for real-time updates',
-        'Implemented message persistence and room management',
-        'Learned deployment and scaling considerations',
+        'Built complete REST API with Node.js and Express backend',
+        'Designed normalized databases and optimized SQL queries',
+        'Deployed to cloud platform and managed CI/CD pipeline',
       ]
     },
     {
-      title: 'Microservices Architecture',
+      title: 'Distributed Systems Project',
       role: 'What I aspire to',
       bullets: [
-        'Design distributed systems with service isolation',
-        'Implement containerization and orchestration (Docker/Kubernetes)',
-        'Master observability, logging, and monitoring at scale',
+        'Design scalable backend architectures for high-traffic systems',
+        'Deep dive into systems programming and performance optimization',
+        'Explore cloud-native development and containerization practices',
       ]
     }
   ]

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Hero() {
-  const exampleHero = "I am a Software Engineer passionate about building scalable, efficient systems and solving complex problems.";
+  const exampleHero = "I am a Computer Science student and aspiring Software Engineer passionate about building elegant, scalable systems and solving complex algorithmic challenges.";
 
   return (
     <section className="hero">

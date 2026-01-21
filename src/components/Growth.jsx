@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function Growth(){
   const learning = [
-    'System Design: architecting scalable backend systems and databases',
-    'Go/Rust: exploring systems programming for performance-critical applications',
-    'DevOps: mastering Docker, Kubernetes, and infrastructure-as-code',
-    'Cloud Architecture: AWS and GCP for distributed deployments'
+    'Computer Science Fundamentals: diving deep into algorithms, complexity analysis, and system design',
+    'Backend Development: mastering Node.js, databases, API design, and authentication patterns',
+    'DevOps & Cloud: learning Docker, Kubernetes, CI/CD pipelines, and AWS deployment strategies',
+    'Software Engineering Practices: clean code, design patterns, testing, and collaborative development'
   ]
 
   return (
