@@ -6,17 +6,17 @@ export default function Hero() {
       <div className="hero-content">
         <div className="hero-main">
           <h1 className="hero-title">
-            Hey, I'm <span className="name">Abby</span>
+            Software Engineer & <span className="accent">DevOps Specialist</span>
           </h1>
           <p className="hero-subtitle">
-            Software Engineer crafting elegant solutions through code, AI, and cloud architecture.
+            Crafting elegant solutions through scalable code, AI pipelines, and cloud infrastructure.
           </p>
           <p className="hero-description">
-            I specialize in building scalable backend systems, machine learning pipelines, and DevOps infrastructure. Let's create something amazing together.
+            I specialize in building robust backend systems, deploying machine learning models, and architecting cloud solutions that scale. Let's build something exceptional.
           </p>
           <div className="hero-cta">
-            <a href="#contact" className="cta-link">Get in touch</a>
-            <a href="#portfolio" className="cta-link secondary">See my work</a>
+            <a href="#portfolio" className="cta-link">View my projects</a>
+            <a href="#contact" className="cta-link secondary">Get in touch</a>
           </div>
         </div>
       </div>
