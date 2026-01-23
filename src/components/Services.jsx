@@ -1,6 +1,12 @@
 import React from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 export default function Services() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['end end', 'start start'] })
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0])
+
   const services = [
     {
       icon: '⚙️',
@@ -34,22 +40,43 @@ export default function Services() {
     }
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  }
+
   return (
-    <section className="services">
-      <div className="section-header">
+    <motion.section className="services" ref={ref} style={{ opacity }}>
+      <motion.div className="section-header" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
         <h2>Services & Expertise</h2>
         <div className="header-line"></div>
-      </div>
+      </motion.div>
 
-      <div className="services-grid">
+      <motion.div className="services-grid" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
         {services.map((service, index) => (
-          <div key={index} className="service-card">
-            <div className="service-icon">{service.icon}</div>
+          <motion.div key={index} className="service-card" variants={cardVariants} whileHover={{ y: -10, transition: { duration: 0.4 } }}>
+            <motion.div className="service-icon" animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 5, repeat: Infinity }}>
+              {service.icon}
+            </motion.div>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   )
 }

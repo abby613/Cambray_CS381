@@ -27,9 +27,13 @@ export default function Contact() {
           <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out!</p>
           
           <div className="contact-links">
-            <a href="mailto:abby@example.com" className="contact-item">
+            <a href="mailto:Altheacambray@gmail.com" className="contact-item">
               <span className="icon">📧</span>
               <span>Email Me</span>
+            </a>
+            <a href="tel:09274863190" className="contact-item">
+              <span className="icon">📱</span>
+              <span>Call Me</span>
             </a>
             <a href="https://linkedin.com" className="contact-item" target="_blank" rel="noopener noreferrer">
               <span className="icon">💼</span>
