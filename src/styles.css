@@ -854,12 +854,16 @@ body::before{
 
 /* Contact Section */
 .contact{
-  margin:40px 0;
+  padding:80px 20px;
   animation:slideInUp 0.8s ease;
 }
 
 .contact-info{
   margin-bottom:60px;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
 }
 
 .contact-info h3{
@@ -878,7 +882,8 @@ body::before{
 .contact-content{
   display:flex;
   flex-direction:column;
-  max-width:800px;
+  max-width:700px;
+  margin:0 auto;
 }
 
 .contact-links{
