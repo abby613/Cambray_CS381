@@ -41,33 +41,6 @@ export default function Footer() {
             <li><a href="#services" className="footer-link">Consulting</a></li>
           </ul>
         </div>
-
-        {/* Contact Section */}
-        <div className="footer-section">
-          <h3>Get In Touch</h3>
-          <ul className="contact-list">
-            <li>
-              <a href="mailto:altheacambray04@gmail.com" className="contact-link">
-                <span className="contact-icon">✉</span> Email
-              </a>
-            </li>
-            <li>
-              <a href="http://www.linkedin.com/in/althea-abbygail-cambray-7116a0382" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span className="contact-icon">💼</span> LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/abby613" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span className="contact-icon">🔗</span> GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span className="contact-icon">𝕏</span> Twitter
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
 
       {/* Divider */}
@@ -80,9 +53,9 @@ export default function Footer() {
             &copy; {currentYear} Althea Abbygail Cambray. All rights reserved.
           </p>
           <div className="footer-meta">
-            <a href="#" className="footer-meta-link">Privacy Policy</a>
+            <a href="#privacy" className="footer-meta-link">Privacy Policy</a>
             <span className="divider">•</span>
-            <a href="#" className="footer-meta-link">Terms of Service</a>
+            <a href="#terms" className="footer-meta-link">Terms of Service</a>
             <span className="divider">•</span>
             <span className="status">🟢 Available for freelance work</span>
           </div>

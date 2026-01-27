@@ -9,9 +9,42 @@ import Services from './components/Services'
 import Growth from './components/Growth'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Privacy from './components/Privacy'
+import Terms from './components/Terms'
 
 export default function App() {
   useScrollReveal()
+
+  // Get hash from URL
+  const hash = window.location.hash.slice(1)
+
+  // Show Privacy page
+  if (hash === 'privacy') {
+    return (
+      <div className="app">
+        <Navigation />
+        <main>
+          <Privacy />
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
+  // Show Terms page
+  if (hash === 'terms') {
+    return (
+      <div className="app">
+        <Navigation />
+        <main>
+          <Terms />
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
+  // Default: Show homepage
   return (
     <div className="app">
       <Navigation />

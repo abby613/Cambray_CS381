@@ -9,34 +9,34 @@ export default function Services() {
 
   const services = [
     {
-      icon: '⚙️',
-      title: 'Backend Development',
-      description: 'RESTful APIs, microservices, database optimization, and scalable server architecture using Node.js, Python, and Go.'
-    },
-    {
-      icon: '🧠',
-      title: 'AI/ML Solutions',
-      description: 'Machine learning models, data pipelines, predictive analytics, and intelligent automation with TensorFlow and scikit-learn.'
-    },
-    {
       icon: '☁️',
-      title: 'Cloud & DevOps',
-      description: 'AWS deployment, Docker containerization, CI/CD pipelines, infrastructure-as-code, and system monitoring.'
+      title: 'Cloud Solutions',
+      description: 'End-to-end Google Cloud Platform (GCP) services including data pipelines, AI integrations, and secure cloud architectures to support client modernization and growth.'
     },
     {
       icon: '📊',
-      title: 'System Design',
-      description: 'Scalable architectures, database design, API optimization, and performance tuning for high-traffic systems.'
+      title: 'Data and Analytics',
+      description: 'Building ETL/ELT pipelines, optimizing databases, and enabling real-time insights through advanced analytics tools.'
+    },
+    {
+      icon: '🧠',
+      title: 'AI and Infrastructure',
+      description: 'Developing AI-powered applications, containerized environments, and orchestrated systems for reliable, scalable operations.'
     },
     {
       icon: '🔐',
-      title: 'Security',
-      description: 'Authentication, authorization, encryption, vulnerability assessment, and secure coding practices.'
+      title: 'Security and Optimization',
+      description: 'Implementing monitoring, logging, and best practices for secure, high-performance cloud infrastructure.'
+    },
+    {
+      icon: '⚙️',
+      title: 'Backend Development',
+      description: 'Java, Python, Go, and C# with opportunities for front-end work in modern frameworks. SQL and NoSQL databases with schema design and query optimization.'
     },
     {
       icon: '🚀',
-      title: 'Full-Stack Development',
-      description: 'End-to-end web applications combining React frontend, Node.js backend, and cloud deployment strategies.'
+      title: 'DevOps & Deployment',
+      description: 'CI/CD pipelines on GitHub/GitLab, Docker containerization, Kubernetes orchestration, testing with Jest/PyTest/JUnit, and GCP deployments with AWS/Azure exposure.'
     }
   ]
 

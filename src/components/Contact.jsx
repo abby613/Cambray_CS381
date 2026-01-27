@@ -1,88 +1,201 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState({ type: '', message: '' })
 
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // In production, integrate with a service like EmailJS or Formspree
-    alert(`Thanks for reaching out, ${formState.name}! I'll get back to you soon.`)
-    setFormState({ name: '', email: '', message: '' })
+    setLoading(true)
+    setStatus({ type: '', message: '' })
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setStatus({
+          type: 'success',
+          message: 'Thanks for reaching out! I\'ll get back to you soon. Check your email for confirmation.',
+        })
+        setFormState({ name: '', email: '', message: '' })
+      } else {
+        setStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.',
+        })
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again.',
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <section className="contact">
-      <div className="section-header">
+      <motion.div 
+        className="section-header" 
+        initial={{ opacity: 0, y: -20 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true }} 
+        transition={{ duration: 0.8 }}
+      >
         <h2>Let's Work Together</h2>
         <div className="header-line"></div>
-      </div>
+      </motion.div>
 
       <div className="contact-content">
-        <div className="contact-info">
+        <motion.div 
+          className="contact-info"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <h3>Get in Touch</h3>
           <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out!</p>
           
           <div className="contact-links">
-            <a href="mailto:Altheacambray@gmail.com" className="contact-item">
+            <motion.a 
+              href="mailto:altheacambray04@gmail.com" 
+              className="contact-item"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="icon">📧</span>
-              <span>Email Me</span>
-            </a>
-            <a href="tel:09274863190" className="contact-item">
+              <span>altheacambray04@gmail.com</span>
+            </motion.a>
+            <motion.a 
+              href="tel:09274863190" 
+              className="contact-item"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="icon">📱</span>
-              <span>Call Me</span>
-            </a>
-            <a href="https://linkedin.com" className="contact-item" target="_blank" rel="noopener noreferrer">
+              <span>09274863190</span>
+            </motion.a>
+            <motion.a 
+              href="https://www.linkedin.com/in/althea-abbygail-cambray-7116a0382" 
+              className="contact-item" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="icon">💼</span>
               <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com" className="contact-item" target="_blank" rel="noopener noreferrer">
+            </motion.a>
+            <motion.a 
+              href="https://github.com/abby613" 
+              className="contact-item" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="icon">🐙</span>
               <span>GitHub</span>
-            </a>
-            <a href="https://twitter.com" className="contact-item" target="_blank" rel="noopener noreferrer">
-              <span className="icon">𝕏</span>
-              <span>Twitter</span>
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <motion.form 
+          className="contact-form" 
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
           <div className="form-group">
+            <label htmlFor="name" className="form-label">Name</label>
             <input
+              id="name"
               type="text"
               name="name"
               placeholder="Your Name"
               value={formState.name}
               onChange={handleChange}
               required
+              disabled={loading}
+              className="form-input"
             />
           </div>
           <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
             <input
+              id="email"
               type="email"
               name="email"
-              placeholder="Your Email"
+              placeholder="your.email@example.com"
               value={formState.email}
               onChange={handleChange}
               required
+              disabled={loading}
+              className="form-input"
             />
           </div>
           <div className="form-group">
+            <label htmlFor="message" className="form-label">Message</label>
             <textarea
+              id="message"
               name="message"
-              placeholder="Your Message"
+              placeholder="Tell me about your project..."
               rows="5"
               value={formState.message}
               onChange={handleChange}
               required
+              disabled={loading}
+              className="form-input"
             ></textarea>
           </div>
-          <button type="submit" className="submit-btn">Send Message</button>
-        </form>
+          
+          {status.message && (
+            <motion.div 
+              className={`form-status ${status.type}`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {status.type === 'success' ? '✅' : '❌'} {status.message}
+            </motion.div>
+          )}
+          
+          <motion.button 
+            type="submit" 
+            className="submit-btn"
+            disabled={loading}
+            whileHover={!loading ? { scale: 1.05 } : {}}
+            whileTap={!loading ? { scale: 0.95 } : {}}
+            transition={{ duration: 0.2 }}
+          >
+            {loading ? (
+              <>
+                <span className="spinner"></span> Sending...
+              </>
+            ) : (
+              'Send Message'
+            )}
+          </motion.button>
+        </motion.form>
       </div>
     </section>
   )
