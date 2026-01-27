@@ -64,60 +64,65 @@ export default function Contact() {
         <div className="header-line"></div>
       </motion.div>
 
+      <motion.div 
+        className="contact-info"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h3>Get in Touch</h3>
+        <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out!</p>
+        
+        <div className="contact-links">
+          <motion.a 
+            href="mailto:altheacambray04@gmail.com" 
+            className="contact-item"
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="contact-icon-box">📧</div>
+            <span className="contact-label">Email</span>
+            <span className="contact-value">altheacambray04@gmail.com</span>
+          </motion.a>
+          <motion.a 
+            href="tel:09274863190" 
+            className="contact-item"
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="contact-icon-box">📱</div>
+            <span className="contact-label">Phone</span>
+            <span className="contact-value">09274863190</span>
+          </motion.a>
+          <motion.a 
+            href="https://www.linkedin.com/in/althea-abbygail-cambray-7116a0382" 
+            className="contact-item" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="contact-icon-box">💼</div>
+            <span className="contact-label">LinkedIn</span>
+            <span className="contact-value">View Profile</span>
+          </motion.a>
+          <motion.a 
+            href="https://github.com/abby613" 
+            className="contact-item" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="contact-icon-box">🐙</div>
+            <span className="contact-label">GitHub</span>
+            <span className="contact-value">View Projects</span>
+          </motion.a>
+        </div>
+      </motion.div>
+
       <div className="contact-content">
-        <motion.div 
-          className="contact-info"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3>Get in Touch</h3>
-          <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out!</p>
-          
-          <div className="contact-links">
-            <motion.a 
-              href="mailto:altheacambray04@gmail.com" 
-              className="contact-item"
-              whileHover={{ x: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="icon">📧</span>
-              <span>altheacambray04@gmail.com</span>
-            </motion.a>
-            <motion.a 
-              href="tel:09274863190" 
-              className="contact-item"
-              whileHover={{ x: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="icon">📱</span>
-              <span>09274863190</span>
-            </motion.a>
-            <motion.a 
-              href="https://www.linkedin.com/in/althea-abbygail-cambray-7116a0382" 
-              className="contact-item" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              whileHover={{ x: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="icon">💼</span>
-              <span>LinkedIn</span>
-            </motion.a>
-            <motion.a 
-              href="https://github.com/abby613" 
-              className="contact-item" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              whileHover={{ x: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="icon">🐙</span>
-              <span>GitHub</span>
-            </motion.a>
-          </div>
-        </motion.div>
 
         <motion.form 
           className="contact-form" 
