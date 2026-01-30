@@ -9,36 +9,23 @@ export default function Footer() {
         {/* About Section */}
         <div className="footer-section">
           <h3>About</h3>
-          <p>Full-stack developer passionate about creating scalable solutions and building products that make an impact in the digital world.</p>
+          <p>Senior Software Engineer passionate about creating scalable solutions and building products that make an impact.</p>
           <div className="footer-badges">
             <span className="badge">React</span>
             <span className="badge">Node.js</span>
-            <span className="badge">DevOps</span>
+            <span className="badge">AI/ML</span>
             <span className="badge">Cloud</span>
           </div>
-        </div>
-
-        {/* Quick Links */}
-        <div className="footer-section">
-          <h3>Quick Links</h3>
-          <ul className="footer-links">
-            <li><a href="#hero" className="footer-link">Home</a></li>
-            <li><a href="#about" className="footer-link">About</a></li>
-            <li><a href="#portfolio" className="footer-link">Portfolio</a></li>
-            <li><a href="#services" className="footer-link">Services</a></li>
-            <li><a href="#growth" className="footer-link">Growth</a></li>
-          </ul>
         </div>
 
         {/* Services */}
         <div className="footer-section">
           <h3>Services</h3>
           <ul className="footer-links">
-            <li><a href="#services" className="footer-link">Web Development</a></li>
-            <li><a href="#services" className="footer-link">AI/ML Solutions</a></li>
-            <li><a href="#services" className="footer-link">DevOps</a></li>
             <li><a href="#services" className="footer-link">Cloud Architecture</a></li>
-            <li><a href="#services" className="footer-link">Consulting</a></li>
+            <li><a href="#services" className="footer-link">AI/ML Solutions</a></li>
+            <li><a href="#services" className="footer-link">Backend Systems</a></li>
+            <li><a href="#services" className="footer-link">DevOps</a></li>
           </ul>
         </div>
       </div>
@@ -50,14 +37,12 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="footer-bottom-content">
           <p className="copyright">
-            &copy; {currentYear} Althea Abbygail Cambray. All rights reserved.
+            © {currentYear} Althea Abbygail Cambray. All rights reserved.
           </p>
           <div className="footer-meta">
-            <a href="#privacy" className="footer-meta-link">Privacy Policy</a>
+            <a href="#privacy" className="footer-meta-link" onClick={(e) => { window.location.hash = 'privacy'; window.location.reload(); }}>Privacy</a>
             <span className="divider">•</span>
-            <a href="#terms" className="footer-meta-link">Terms of Service</a>
-            <span className="divider">•</span>
-            <span className="status">🟢 Available for freelance work</span>
+            <a href="#terms" className="footer-meta-link" onClick={(e) => { window.location.hash = 'terms'; window.location.reload(); }}>Terms</a>
           </div>
         </div>
       </div>

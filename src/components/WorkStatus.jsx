@@ -1,140 +1,142 @@
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function WorkStatus() {
-  const [activeTab, setActiveTab] = useState('completed')
+  const [expandedSection, setExpandedSection] = useState('completed')
 
   const completed = [
-    {
-      title: 'Portfolio Website Redesign',
-      description: 'Redesigned and deployed a modern 3D developer portfolio with advanced CSS animations and light/dark mode support.',
-      technologies: ['React', 'CSS3', '3D Transforms'],
-      date: 'Jan 2026',
-      impact: 'Enhanced user engagement by 40%'
-    },
-    {
-      title: 'ML Model Optimization',
-      description: 'Optimized TensorFlow models reducing inference time by 60% through quantization and pruning techniques.',
-      technologies: ['Python', 'TensorFlow', 'ONNX'],
-      date: 'Dec 2025',
-      impact: 'Reduced latency from 500ms to 200ms'
-    },
-    {
-      title: 'Microservices Migration',
-      description: 'Successfully migrated monolithic application to microservices architecture with Kubernetes orchestration.',
-      technologies: ['Node.js', 'Kubernetes', 'Docker'],
-      date: 'Nov 2025',
-      impact: 'Improved scalability by 3x'
-    },
-    {
-      title: 'CI/CD Pipeline Setup',
-      description: 'Implemented automated CI/CD pipeline with GitHub Actions for seamless deployments.',
-      technologies: ['GitHub Actions', 'Docker', 'AWS'],
-      date: 'Oct 2025',
-      impact: 'Reduced deployment time from 2 hours to 10 minutes'
-    }
+    { title: 'Enterprise AI Platform', date: 'Jan 2028', impact: '+60% efficiency' },
+    { title: 'ML Model Optimization', date: 'Dec 2027', impact: '80% faster' },
+    { title: 'Microservices Migration', date: 'Nov 2027', impact: '5x scale' },
   ]
 
   const inProgress = [
-    {
-      title: 'AI-Powered Analytics Dashboard',
-      description: 'Building real-time analytics dashboard with ML-powered insights and predictive analytics.',
-      technologies: ['React', 'Python', 'TensorFlow', 'WebSocket'],
-      progress: 65,
-      expectedCompletion: 'Feb 2026'
-    },
-    {
-      title: 'Distributed Cache System',
-      description: 'Developing high-performance distributed caching layer using Redis cluster and consistent hashing.',
-      technologies: ['Go', 'Redis', 'Protocol Buffers'],
-      progress: 45,
-      expectedCompletion: 'Mar 2026'
-    },
-    {
-      title: 'Cloud Cost Optimization Tool',
-      description: 'Creating intelligent tool to analyze and optimize cloud infrastructure spending across AWS, GCP, and Azure.',
-      technologies: ['Node.js', 'AWS SDK', 'React'],
-      progress: 30,
-      expectedCompletion: 'Apr 2026'
-    },
-    {
-      title: 'Advanced Logging Framework',
-      description: 'Building structured logging framework with ELK stack integration for centralized monitoring.',
-      technologies: ['Python', 'ELK Stack', 'Kubernetes'],
-      progress: 55,
-      expectedCompletion: 'Mar 2026'
-    }
+    { title: 'AI Analytics Dashboard', progress: 65, expected: 'Feb 2028' },
+    { title: 'Distributed Cache System', progress: 45, expected: 'Mar 2028' },
+    { title: 'Cloud Cost Optimizer', progress: 30, expected: 'Apr 2028' },
   ]
 
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section)
+  }
+
   return (
-    <section className="work-status">
-      <div className="work-container">
-        <h2 className="work-title">Work Status</h2>
-        
-        <div className="tab-buttons">
+    <section className="work-status" id="work">
+      <motion.div 
+        className="section-header"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2>Work Status</h2>
+        <p>Recent completions and current projects</p>
+        <div className="header-line"></div>
+      </motion.div>
+
+      <motion.div 
+        className="work-accordion"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Completed Section */}
+        <div className="accordion-item">
           <button 
-            className={`tab-btn ${activeTab === 'completed' ? 'active' : ''}`}
-            onClick={() => setActiveTab('completed')}
+            className={`accordion-header ${expandedSection === 'completed' ? 'active' : ''}`}
+            onClick={() => toggleSection('completed')}
           >
-            ✓ Completed
+            <div className="accordion-title">
+              <span className="accordion-icon">✓</span>
+              <span>Completed Projects</span>
+              <span className="accordion-count">{completed.length}</span>
+            </div>
+            <span className={`accordion-arrow ${expandedSection === 'completed' ? 'open' : ''}`}>▼</span>
           </button>
-          <button 
-            className={`tab-btn ${activeTab === 'progress' ? 'active' : ''}`}
-            onClick={() => setActiveTab('progress')}
-          >
-            ⏳ In Progress
-          </button>
+          
+          <AnimatePresence>
+            {expandedSection === 'completed' && (
+              <motion.div 
+                className="accordion-content"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="work-grid horizontal">
+                  {completed.map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      className="work-card completed"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="work-card-header">
+                        <h4>{item.title}</h4>
+                        <span className="status-badge done">✓</span>
+                      </div>
+                      <div className="work-card-meta">
+                        <span className="date">{item.date}</span>
+                        <span className="impact">{item.impact}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        <div className="work-content">
-          {activeTab === 'completed' && (
-            <div className="work-items">
-              {completed.map((item, idx) => (
-                <div key={idx} className="work-item completed-item">
-                  <div className="work-header">
-                    <div className="work-info">
-                      <h3>{item.title}</h3>
-                      <p className="work-date">{item.date}</p>
-                    </div>
-                    <div className="completion-badge">✓ Done</div>
-                  </div>
-                  <p className="work-description">{item.description}</p>
-                  <p className="work-impact">📊 {item.impact}</p>
-                  <div className="work-tech">
-                    {item.technologies.map((tech, i) => (
-                      <span key={i} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+        {/* In Progress Section */}
+        <div className="accordion-item">
+          <button 
+            className={`accordion-header ${expandedSection === 'progress' ? 'active' : ''}`}
+            onClick={() => toggleSection('progress')}
+          >
+            <div className="accordion-title">
+              <span className="accordion-icon">⏳</span>
+              <span>In Progress</span>
+              <span className="accordion-count">{inProgress.length}</span>
             </div>
-          )}
-
-          {activeTab === 'progress' && (
-            <div className="work-items">
-              {inProgress.map((item, idx) => (
-                <div key={idx} className="work-item progress-item">
-                  <div className="work-header">
-                    <div className="work-info">
-                      <h3>{item.title}</h3>
-                      <p className="work-date">Expected: {item.expectedCompletion}</p>
-                    </div>
-                    <div className="progress-percentage">{item.progress}%</div>
-                  </div>
-                  <p className="work-description">{item.description}</p>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${item.progress}%` }}></div>
-                  </div>
-                  <div className="work-tech">
-                    {item.technologies.map((tech, i) => (
-                      <span key={i} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
+            <span className={`accordion-arrow ${expandedSection === 'progress' ? 'open' : ''}`}>▼</span>
+          </button>
+          
+          <AnimatePresence>
+            {expandedSection === 'progress' && (
+              <motion.div 
+                className="accordion-content"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="work-grid horizontal">
+                  {inProgress.map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      className="work-card progress"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <div className="work-card-header">
+                        <h4>{item.title}</h4>
+                        <span className="status-badge pending">{item.progress}%</span>
+                      </div>
+                      <div className="progress-bar-container">
+                        <div className="progress-bar-fill" style={{ width: `${item.progress}%` }}></div>
+                      </div>
+                      <span className="expected">Expected: {item.expected}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

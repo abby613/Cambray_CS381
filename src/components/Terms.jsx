@@ -2,18 +2,28 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 export default function Terms() {
+  const goHome = (e) => {
+    e.preventDefault()
+    window.location.href = window.location.pathname
+  }
+
   return (
     <motion.section className="legal-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
       <div className="legal-container">
+        <a href="/" onClick={goHome} className="back-to-home">← Back to Portfolio</a>
+        
         <motion.h1 initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }}>
           Terms of Service
         </motion.h1>
 
         <motion.div className="legal-content" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.1 }}>
           <div className="legal-section-item">
-            <h2>1. Acceptance of Terms</h2>
+            <h2>1. About These Terms</h2>
             <p>
-              By accessing and using this website and professional portfolio, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+              Welcome! These terms govern your use of my portfolio website and outline the framework for professional engagements. By accessing this site or engaging my services as a Software Engineer, you agree to these terms.
+            </p>
+            <p>
+              I'm available for <strong>freelance projects</strong>, <strong>contract work</strong>, and <strong>full-time opportunities</strong> in AI/ML, DevOps, Cloud Architecture, and Backend Development.
             </p>
           </div>
 
@@ -74,27 +84,49 @@ export default function Terms() {
           </div>
 
           <div className="legal-section-item">
-            <h2>9. Professional Services</h2>
+            <h2>9. Professional Services & Engagement</h2>
             <p>
-              Any professional services offered are subject to separate agreement. Portfolio items and project descriptions are for demonstration purposes. Actual project details may be subject to confidentiality agreements.
+              I offer professional software engineering services including:
+            </p>
+            <ul>
+              <li><strong>Freelance/Contract Work:</strong> Project-based engagements with clear deliverables</li>
+              <li><strong>Consulting:</strong> Technical advisory and architecture review</li>
+              <li><strong>Full-time Employment:</strong> Open to the right opportunity</li>
+            </ul>
+            <p>
+              All professional engagements are subject to a separate written agreement outlining scope, timeline, compensation, and deliverables. Portfolio items shown are for demonstration purposes; actual project details may be subject to confidentiality agreements with previous clients.
             </p>
           </div>
 
           <div className="legal-section-item">
-            <h2>10. Contact Information</h2>
+            <h2>10. Confidentiality</h2>
             <p>
-              If you have any questions about these Terms of Service, please contact us at:
-              <br />
-              Email: altheacambray04@gmail.com
-              <br />
-              Phone: 09274863190
+              I take confidentiality seriously. Any sensitive information shared during project discussions will be treated as confidential. I'm happy to sign NDAs when required for specific engagements.
             </p>
           </div>
 
           <div className="legal-section-item">
-            <p className="last-updated">Last Updated: January 27, 2026</p>
+            <h2>11. Let's Work Together</h2>
+            <p>
+              I'm excited to collaborate on meaningful projects. Whether you need an AI/ML solution, cloud architecture, DevOps pipeline, or full-stack development, I'm here to help turn your vision into reality.
+            </p>
+            <p>
+              <strong>Contact me at:</strong><br />
+              📧 Email: altheacambray04@gmail.com<br />
+              📱 Phone: 09274863190<br />
+              💼 LinkedIn: linkedin.com/in/althea-abbygail-cambray-7116a0382
+            </p>
+          </div>
+
+          <div className="legal-section-item">
+            <p className="last-updated">Last Updated: January 29, 2028</p>
           </div>
         </motion.div>
+        
+        <div className="legal-cta">
+          <a href="#" className="cta-button">Back to Portfolio</a>
+          <a href="#contact" className="cta-button secondary">Get in Touch</a>
+        </div>
       </div>
     </motion.section>
   )

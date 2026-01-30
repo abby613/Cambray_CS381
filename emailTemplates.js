@@ -67,7 +67,7 @@ export const adminEmailTemplate = (name, email, message) => `
           An auto-reply has been sent to the user.
         </p>
         <p style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 15px;">
-          🟢 Status: Active for freelance/contract work<br>
+          🟢 Status: Active for freelance/Contract work<br>
           📧 <a href="mailto:altheacambray04@gmail.com">altheacambray04@gmail.com</a>
         </p>
       </div>

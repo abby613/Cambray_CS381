@@ -1,103 +1,184 @@
 import React, { useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-function ProjectCard({title, description, tech, link}) {
-  const [isHovered, setIsHovered] = useState(false)
-
+function ProjectCard({ title, description, tech, category, impact, color, index, image }) {
   return (
     <motion.article 
       className="project-card"
-      whileHover={{ scale: 1.02, transition: { duration: 0.4 } }}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.8 }}
+      layout
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: 20 }}
+      whileHover={{ y: -5, transition: { duration: 0.3 } }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
     >
+      <div className="project-image">
+        <img src={image} alt={title} />
+        <div className="project-image-overlay"></div>
+      </div>
       <div className="project-inner">
+        <div className="project-category-badge" style={{ backgroundColor: color + '20', color: color }}>
+          {category}
+        </div>
         <div className="project-header">
           <h3>{title}</h3>
-          <motion.span className="project-link" animate={isHovered ? { x: 5 } : { x: 0 }} transition={{ duration: 0.3 }}>→</motion.span>
         </div>
         <p className="project-description">{description}</p>
+        {impact && (
+          <div className="project-impact">
+            <span className="impact-icon">📈</span>
+            <span className="impact-text">{impact}</span>
+          </div>
+        )}
         <div className="project-tech">
           {tech.map((t, i) => (
-            <motion.span key={i} className="tech-badge" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05, duration: 0.4 }}>
-              {t}
-            </motion.span>
+            <span key={i} className="tech-badge">{t}</span>
           ))}
         </div>
       </div>
-      <div className="project-glow"></div>
     </motion.article>
   )
 }
 
 export default function Projects() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['end end', 'start start'] })
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0])
+  const [activeFilter, setActiveFilter] = useState('All')
+
+  const categories = [
+    { name: 'All', color: '#e8a4c9' },
+    { name: 'AI/ML', color: '#9d6bff' },
+    { name: 'Backend', color: '#e8a4c9' },
+    { name: 'Cloud', color: '#00b894' },
+    { name: 'DevOps', color: '#f0b866' }
+  ]
 
   const projects = [
     {
-      title: 'ML Pipeline Automation',
-      description: 'Built automated ML training and deployment pipeline reducing model iteration time by 60%. Integrated with cloud storage and monitoring systems.',
-      tech: ['Python', 'TensorFlow', 'AWS', 'Docker']
+      title: 'ML Pipeline Platform',
+      category: 'AI/ML',
+      description: 'End-to-end automated ML training and deployment pipeline with model versioning and A/B testing.',
+      tech: ['Python', 'TensorFlow', 'AWS SageMaker'],
+      impact: '60% faster model iterations',
+      color: '#9d6bff',
+      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop'
     },
     {
-      title: 'Microservices Architecture',
-      description: 'Designed and implemented scalable microservices platform handling 100k+ daily requests with load balancing and service discovery.',
-      tech: ['Node.js', 'Kubernetes', 'PostgreSQL', 'gRPC']
+      title: 'E-Commerce Microservices',
+      category: 'Backend',
+      description: 'Scalable microservices architecture with event-driven communication and 99.9% uptime.',
+      tech: ['Node.js', 'Kubernetes', 'PostgreSQL'],
+      impact: '100k+ daily requests',
+      color: '#e8a4c9',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop'
     },
     {
-      title: 'Real-time Analytics Dashboard',
-      description: 'Created real-time data visualization system with WebSocket integration for live analytics and custom reporting capabilities.',
-      tech: ['React', 'D3.js', 'WebSocket', 'Go']
+      title: 'Multi-Cloud Infrastructure',
+      category: 'Cloud',
+      description: 'Infrastructure-as-code framework for seamless multi-environment deployments.',
+      tech: ['Terraform', 'AWS', 'GCP'],
+      impact: 'Zero-downtime deploys',
+      color: '#00b894',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop'
     },
     {
-      title: 'Infrastructure-as-Code Setup',
-      description: 'Established IaC framework for multi-environment deployments with automated CI/CD, monitoring, and rollback capabilities.',
-      tech: ['Terraform', 'GitHub Actions', 'Prometheus', 'ELK']
+      title: 'CI/CD Optimization',
+      category: 'DevOps',
+      description: 'Redesigned pipeline reducing build times with parallel testing and auto rollback.',
+      tech: ['GitHub Actions', 'Docker', 'ArgoCD'],
+      impact: '70% faster deployments',
+      color: '#f0b866',
+      image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&h=400&fit=crop'
     },
     {
-      title: 'API Gateway & Rate Limiter',
-      description: 'Engineered high-performance API gateway with intelligent rate limiting, authentication, and request routing for enterprise systems.',
-      tech: ['Go', 'Redis', 'JWT', 'Nginx']
+      title: 'Predictive Maintenance',
+      category: 'AI/ML',
+      description: 'ML-powered system for predicting equipment failures using sensor data.',
+      tech: ['Python', 'scikit-learn', 'Kafka'],
+      impact: '40% less downtime',
+      color: '#9d6bff',
+      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop'
     },
     {
-      title: 'Data Processing Engine',
-      description: 'Developed distributed data processing engine for ETL operations, handling petabyte-scale datasets with fault tolerance.',
-      tech: ['Spark', 'Scala', 'Cassandra', 'Airflow']
+      title: 'API Gateway',
+      category: 'Backend',
+      description: 'High-performance gateway with rate limiting, JWT auth, and caching.',
+      tech: ['Go', 'Redis', 'Prometheus'],
+      impact: '1M+ requests/day',
+      color: '#e8a4c9',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop'
+    },
+    {
+      title: 'Real-Time Chat Platform',
+      category: 'Backend',
+      description: 'WebSocket-based messaging system with end-to-end encryption and offline sync.',
+      tech: ['Node.js', 'Socket.io', 'MongoDB'],
+      impact: '50k+ concurrent users',
+      color: '#e8a4c9',
+      image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop'
+    },
+    {
+      title: 'Smart Analytics Dashboard',
+      category: 'AI/ML',
+      description: 'Interactive data visualization with AI-powered insights and anomaly detection.',
+      tech: ['React', 'D3.js', 'Python', 'GPT-4'],
+      impact: 'Real-time insights for 500+ users',
+      color: '#9d6bff',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop'
     }
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === activeFilter)
 
   return (
-    <motion.section id="portfolio" className="scroll-section projects" ref={ref} style={{ opacity }}>
-      <motion.div className="section-header" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+    <section id="portfolio" className="projects">
+      <motion.div 
+        className="section-header" 
+        initial={{ opacity: 0, y: -20 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true }} 
+        transition={{ duration: 0.8 }}
+      >
         <h2>Featured Projects</h2>
-        <p>A showcase of recent work across backend, ML, and cloud infrastructure</p>
+        <p>Showcase of AI/ML, backend, cloud, and DevOps work</p>
+        <div className="header-line"></div>
       </motion.div>
-      <motion.div className="projects-grid" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-100px' }}>
-        {projects.map((project, i) => (
-          <ProjectCard 
-            key={i}
-            title={project.title}
-            description={project.description}
-            tech={project.tech}
-            link={project.link}
-          />
+
+      <motion.div 
+        className="project-filters" 
+        initial={{ opacity: 0 }} 
+        whileInView={{ opacity: 1 }} 
+        viewport={{ once: true }}
+      >
+        {categories.map((cat) => (
+          <motion.button
+            key={cat.name}
+            className={`filter-btn ${activeFilter === cat.name ? 'active' : ''}`}
+            onClick={() => setActiveFilter(cat.name)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={activeFilter === cat.name ? { backgroundColor: cat.color, borderColor: cat.color } : {}}
+          >
+            {cat.name}
+          </motion.button>
         ))}
       </motion.div>
-    </motion.section>
+
+      <div className="projects-grid">
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, i) => (
+            <ProjectCard 
+              key={project.title}
+              index={i}
+              {...project}
+            />
+          ))}
+        </AnimatePresence>
+      </div>
+    </section>
   )
 }
